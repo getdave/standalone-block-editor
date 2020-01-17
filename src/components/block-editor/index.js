@@ -3,7 +3,7 @@
  */
 import '@wordpress/editor'; // This shouldn't be necessary
 import '@wordpress/format-library';
-import { useSelect } from '@wordpress/data';
+import { useSelect, useDispatch } from '@wordpress/data';
 import { useEffect, useState, useMemo } from '@wordpress/element';
 import { serialize, parse } from '@wordpress/blocks';
 import { uploadMedia } from '@wordpress/media-utils';
@@ -30,6 +30,7 @@ import Sidebar from 'components/sidebar';
 
 function BlockEditor({settings: _settings}) {
     const [blocks, updateBlocks] = useState( [] );
+    const { createInfoNotice } = useDispatch('core/notices');
 
     const canUserCreateMedia = useSelect((select) => {
         const _canUserCreateMedia = select('core').canUser('create', 'media');
@@ -57,6 +58,10 @@ function BlockEditor({settings: _settings}) {
 
         if (storedBlocks && storedBlocks.length) {
             updateBlocks(parse(storedBlocks));
+            createInfoNotice('Blocks loaded', {
+                type: 'snackbar',
+                isDismissible: true,
+            });
         }
 
     },[])
