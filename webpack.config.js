@@ -2,6 +2,14 @@ const path = require( 'path');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const defaultConfig = require("@wordpress/scripts/config/webpack.config");
+
+const rootDir = path.resolve(__dirname);
+
+const paths = {
+    srcDir: path.resolve(rootDir, 'src'),
+    buildDIr: path.resolve(rootDir, 'build')
+};
+
 module.exports = {
     ...defaultConfig,
     module: {
@@ -39,6 +47,13 @@ module.exports = {
     plugins: [
         ...defaultConfig.plugins,
         new MiniCssExtractPlugin(),
-    ]
+    ],
+    resolve: {
+        ...defaultConfig.resolve,
+        // alias directories to paths you can use in import() statements
+        alias: {
+            components: path.join(paths.srcDir, 'components'),
+        }
+    }
 };
 

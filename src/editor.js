@@ -8,9 +8,9 @@ import {
 /**
  * Internal dependencies
  */
-import Header from './header';
-import Sidebar from './sidebar';
-import BlockEditor from './block-editor';
+import Header from 'components/header';
+import Sidebar from 'components/sidebar';
+import BlockEditor from 'components/block-editor';
 
 function Editor({ settings={} }) {
     return (

@@ -111,7 +111,7 @@ function getdave_sbe_render_block_editor() {
 		id="getdave-sbe-block-editor"
 		class="getdave-sbe-block-editor"
 	>
-	Block Editor here
+		Loading Editor...
 	</div>
 	<?php
 }

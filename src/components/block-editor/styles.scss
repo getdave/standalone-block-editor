@@ -1,0 +1,41 @@
+.getdave-sbe-block-editor {
+    background-color: $white;
+	// On mobile the main content area has to scroll, otherwise you can invoke
+	// the over-scroll bounce on the non-scrolling container, for a bad experience.
+	@include break-small {
+		bottom: 0;
+		left: 0;
+		min-height: calc(100vh - #{$admin-bar-height-big});
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+
+	// The WP header height changes at this breakpoint.
+	@include break-medium {
+		min-height: calc(100vh - #{$admin-bar-height});
+	}
+
+	> .components-navigate-regions {
+		height: 100%;
+	}
+}
+
+
+
+.editor-styles-wrapper {
+	-webkit-overflow-scrolling: touch;
+	background: $white;
+	height: calc(100% - #{$header-height});
+	left: 0;
+	overflow: auto;
+	position: absolute;
+	top: $header-height;
+	width: 100%;
+
+	@include break-small {
+		width: calc(100% - #{$sidebar-width});
+	}
+}
+
+

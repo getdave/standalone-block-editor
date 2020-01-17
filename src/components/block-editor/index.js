@@ -23,8 +23,7 @@ import {
 /**
  * Internal dependencies
  */
-import Sidebar from './sidebar';
-// import './style.scss';
+import Sidebar from 'components/sidebar';
 
 function BlockEditor() {
     const [blocks, updateBlocks] = useState([]);
