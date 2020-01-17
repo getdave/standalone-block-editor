@@ -5,6 +5,20 @@
 @import "~@wordpress/base-styles/animations";
 @import "~@wordpress/base-styles/z-index";
 
+// Grab the default Editor styles for visual consistency with WP
+.editor-styles-wrapper {
+	// We need the styles scoped to "body" to be added to the
+	// div.editor-styles wrapper
+	font-family: $editor-font;
+	font-size: $editor-font-size;
+	line-height: $editor-line-height;
+	color: $dark-gray-900;
+
+	// Important all other selectors scoped underneath
+	// `div.editor-styles-wrapper`
+	@import "~@wordpress/editor/src/editor-styles.scss";
+}
+
 // Internal
 @import "components/header/styles";
 @import "components/sidebar/styles";
