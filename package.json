@@ -3,11 +3,30 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "cgb-scripts start",
-    "build": "cgb-scripts build",
-    "eject": "cgb-scripts eject"
+    "build": "wp-scripts build",
+    "check-engines": "wp-scripts check-engines",
+    "check-licenses": "wp-scripts check-licenses",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "lint:md": "wp-scripts lint-md",
+    "lint:pkg-json": "wp-scripts lint-pkg-json",
+    "packages-update": "wp-scripts packages-update",
+    "start": "wp-scripts start",
+    "test:e2e": "wp-scripts test-e2e",
+    "test:unit": "wp-scripts test-unit-js"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^6.2.0",
+    "eslint": "^6.8.0",
+    "webpack": "^4.41.5"
   },
   "dependencies": {
-    "cgb-scripts": "1.15.0"
+    "@wordpress/block-editor": "^3.5.0",
+    "@wordpress/block-library": "^2.12.0",
+    "@wordpress/components": "^9.0.0",
+    "@wordpress/dom-ready": "^2.6.0",
+    "@wordpress/editor": "^9.10.0",
+    "@wordpress/element": "^2.10.0",
+    "@wordpress/format-library": "^1.12.0"
   }
 }
