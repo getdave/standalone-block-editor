@@ -13,12 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function getdave_sbe_block_editor_init( $hook ) {
 
-	if ( 'toplevel_page_getdavesbe' !== $hook ) {
-		return;
-	}
-
+function getdave_sbe_get_block_editor_settings() {
 	$settings = array(
 		'disableCustomColors'    => get_theme_support( 'disable-custom-colors' ),
 		'disableCustomFontSizes' => get_theme_support( 'disable-custom-font-sizes' ),
@@ -35,14 +31,32 @@ function getdave_sbe_block_editor_init( $hook ) {
 		$settings['fontSizes'] = $font_sizes;
 	}
 
-	wp_enqueue_script(
-		'getdave_aht-cgb-block-js', // Handle.
-		plugins_url( 'getdave-standalone-block-editor/build/index.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
-		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-block-library' ), // Dependencies, defined above.
-		// filemtime( plugin_dir_path( __DIR__ ) . 'build/blocks.build.js' ), // Version: File modification time.
-		true // Enqueue the script in the footer.
-	);
+	return $settings;
+}
 
+function getdave_sbe_block_editor_init( $hook ) {
+
+	if ( 'toplevel_page_getdavesbe' !== $hook ) {
+		return;
+	}
+
+	// Grab Editor Settings
+	$settings = getdave_sbe_get_block_editor_settings();
+
+	// Enqueue scripts with @wordpress package deps extracted via `@wordpress/wp-scripts
+	// See:
+	// - https://developer.wordpress.org/block-editor/packages/packages-scripts/#webpack-config
+	// - https://developer.wordpress.org/block-editor/packages/packages-dependency-extraction-webpack-plugin/
+	$script_path       = 'build/index.js';
+	$script_asset_path = dirname( __FILE__ ) . '/build/index.asset.php';
+	$script_asset      = file_exists( $script_asset_path )
+		? require( $script_asset_path )
+		: array( 'dependencies' => array(), 'version' => filemtime( $script_path ) );
+	$script_url = plugins_url( $script_path, __FILE__ );
+
+	wp_enqueue_script( 'getdave_aht-cgb-block-js', $script_url, $script_asset['dependencies'], $script_asset['version'] );
+
+	// Editor default styles
 	wp_enqueue_style( 'wp-format-library' );
 
 	// Styles.
