@@ -1,1 +1,1 @@
-# Alternative Homepage Templates
+# Standalone Gutenberg Block Editor
