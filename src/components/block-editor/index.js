@@ -83,7 +83,7 @@ function BlockEditor({settings: _settings}) {
                     <BlockEditorKeyboardShortcuts />
                     <WritingFlow>
                         <ObserveTyping>
-                            <BlockList />
+                            <BlockList className="getdavesbe-block-editor__block-list"/>
                         </ObserveTyping>
                     </WritingFlow>
                 </div>
