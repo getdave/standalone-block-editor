@@ -50,22 +50,25 @@ function getdave_sbe_block_editor_init( $hook ) {
 	$script_path       = 'build/index.js';
 	$script_asset_path = dirname( __FILE__ ) . '/build/index.asset.php';
 	$script_asset      = file_exists( $script_asset_path )
-		? require( $script_asset_path )
-		: array( 'dependencies' => array(), 'version' => filemtime( $script_path ) );
-	$script_url = plugins_url( $script_path, __FILE__ );
+		? require $script_asset_path
+		: array(
+			'dependencies' => array(),
+			'version'      => filemtime( $script_path ),
+		);
+	$script_url        = plugins_url( $script_path, __FILE__ );
 
-	wp_enqueue_script( 'getdave_aht-cgb-block-js', $script_url, $script_asset['dependencies'], $script_asset['version'] );
+	wp_enqueue_script( 'getdave-sbe-scripts', $script_url, $script_asset['dependencies'], $script_asset['version'] );
 
 	// Editor default styles
 	wp_enqueue_style( 'wp-format-library' );
 
-	// Styles.
-	// wp_enqueue_style(
-	// 'getdave_aht-cgb-block-editor-css', // Handle.
-	// plugins_url( 'build/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
-	// array( 'wp-edit-blocks' ) // Dependency to include the CSS after it.
-	// filemtime( plugin_dir_path( __DIR__ ) . 'build/blocks.editor.build.css' ) // Version: File modification time.
-	// );
+	// Styles
+	wp_enqueue_style(
+		'getdave-sbe-styles', // Handle.
+		plugins_url( 'build/index.css', __FILE__ ), // Block editor CSS.
+		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
+		filemtime( dirname( __FILE__ ) . '/build/index.css' ) // Version: File modification time.
+	);
 }
 
 add_action( 'admin_enqueue_scripts', 'getdave_sbe_block_editor_init' );

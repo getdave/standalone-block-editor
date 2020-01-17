@@ -16,9 +16,11 @@ function Editor({ settings={} }) {
     return (
         <SlotFillProvider>
             <DropZoneProvider>
-                <Header />
-                <Sidebar />
-                <BlockEditor settings={settings} />
+                <div class="getdavesbe-block-editor-layout">
+                    <Header />
+                    <Sidebar />
+                    <BlockEditor settings={settings} />
+                </div>
                 <Popover.Slot />
             </DropZoneProvider>
         </SlotFillProvider>
