@@ -3,12 +3,12 @@ import { render } from '@wordpress/element';
 import { registerCoreBlocks } from '@wordpress/block-library';
 
 
-import BlockEditor from './block-editor';
+import Editor from './editor';
 
 
 domReady(function () {
     console.log("JS Loadeding");
     registerCoreBlocks();
-    render(<BlockEditor />, document.getElementById('getdave-sbe-block-editor'));
+    render(<Editor />, document.getElementById('getdave-sbe-block-editor'));
 });
 
