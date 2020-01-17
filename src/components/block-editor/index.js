@@ -5,6 +5,7 @@ import '@wordpress/editor'; // This shouldn't be necessary
 import '@wordpress/format-library';
 
 import { useEffect, useState } from '@wordpress/element';
+import { serialize, parse } from '@wordpress/blocks';
 import {
     BlockEditorKeyboardShortcuts,
     BlockEditorProvider,
@@ -25,19 +26,32 @@ import {
  */
 import Sidebar from 'components/sidebar';
 
-function BlockEditor() {
-    const [blocks, updateBlocks] = useState([]);
+function BlockEditor({settings}) {
+    const [blocks, updateBlocks] = useState( [] );
+
+
+
+    function persistBlocks(blocks) {
+        updateBlocks(blocks);
+        localStorage.setItem('getdavesbeBlocks', serialize(blocks));
+    }
 
     useEffect(() => {
-        // registerCoreBlocks();
-    }, []);
+        const storedBlocks = localStorage.getItem('getdavesbeBlocks');
+        console.log(storedBlocks);
+        if (storedBlocks && storedBlocks.length) {
+            updateBlocks(parse(storedBlocks));
+        }
+
+    },[])
 
     return (
         <div className="getdavesbe-block-editor">
             <BlockEditorProvider
                 value={blocks}
                 onInput={updateBlocks}
-                onChange={updateBlocks}
+                onChange={persistBlocks}
+                settings={settings}
             >
                 <Sidebar.InspectorFill>
                     <BlockInspector />

@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@wordpress/base-styles": "^1.2.0",
+    "@wordpress/blocks": "^6.10.0",
     "@wordpress/scripts": "^6.2.0",
     "autoprefixer": "^9.7.4",
     "css-loader": "^3.4.2",

@@ -14,25 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-function getdave_sbe_get_block_editor_settings() {
-	$settings = array(
-		'disableCustomColors'    => get_theme_support( 'disable-custom-colors' ),
-		'disableCustomFontSizes' => get_theme_support( 'disable-custom-font-sizes' ),
-		// 'imageSizes'             => $available_image_sizes,
-		'isRTL'                  => is_rtl(),
-		// 'maxUploadFileSize'      => $max_upload_size,
-	);
-	list( $color_palette, ) = (array) get_theme_support( 'editor-color-palette' );
-	list( $font_sizes, )    = (array) get_theme_support( 'editor-font-sizes' );
-	if ( false !== $color_palette ) {
-		$settings['colors'] = $color_palette;
-	}
-	if ( false !== $font_sizes ) {
-		$settings['fontSizes'] = $font_sizes;
-	}
 
-	return $settings;
-}
 
 function getdave_sbe_block_editor_init( $hook ) {
 
@@ -40,8 +22,9 @@ function getdave_sbe_block_editor_init( $hook ) {
 		return;
 	}
 
-	// Grab Editor Settings
-	$settings = getdave_sbe_get_block_editor_settings();
+	$script_handle = 'getdave-sbe-scripts';
+
+
 
 	// Enqueue scripts with @wordpress package deps extracted via `@wordpress/wp-scripts
 	// See:
@@ -57,7 +40,12 @@ function getdave_sbe_block_editor_init( $hook ) {
 		);
 	$script_url        = plugins_url( $script_path, __FILE__ );
 
-	wp_enqueue_script( 'getdave-sbe-scripts', $script_url, $script_asset['dependencies'], $script_asset['version'] );
+	wp_enqueue_script( $script_handle, $script_url, $script_asset['dependencies'], $script_asset['version'] );
+
+
+	// Inline the Editor Settings
+	$settings = getdave_sbe_get_block_editor_settings();
+	wp_add_inline_script( $script_handle, 'window.getdaveSbeSettings = ' . wp_json_encode( $settings ) . ';' );
 
 	// Editor default styles
 	wp_enqueue_style( 'wp-format-library' );
@@ -72,11 +60,6 @@ function getdave_sbe_block_editor_init( $hook ) {
 }
 
 add_action( 'admin_enqueue_scripts', 'getdave_sbe_block_editor_init' );
-
-
-
-
-
 
 
 
@@ -117,4 +100,22 @@ function getdave_sbe_render_block_editor() {
 }
 
 
+function getdave_sbe_get_block_editor_settings() {
+	$settings = array(
+		'disableCustomColors'    => get_theme_support( 'disable-custom-colors' ),
+		'disableCustomFontSizes' => get_theme_support( 'disable-custom-font-sizes' ),
+		// 'imageSizes'             => $available_image_sizes,
+		'isRTL'                  => is_rtl(),
+		// 'maxUploadFileSize'      => $max_upload_size,
+	);
+	list( $color_palette, ) = (array) get_theme_support( 'editor-color-palette' );
+	list( $font_sizes, )    = (array) get_theme_support( 'editor-font-sizes' );
+	if ( false !== $color_palette ) {
+		$settings['colors'] = $color_palette;
+	}
+	if ( false !== $font_sizes ) {
+		$settings['fontSizes'] = $font_sizes;
+	}
 
+	return $settings;
+}

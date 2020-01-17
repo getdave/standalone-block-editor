@@ -5,8 +5,13 @@ import Editor from './editor';
 
 import './styles.scss';
 
+
+
+
+
 domReady(function () {
+    const settings = window.getdaveSbeSettings || {};
     registerCoreBlocks();
-    render(<Editor />, document.getElementById('getdave-sbe-block-editor'));
+    render(<Editor settings={settings}/>, document.getElementById('getdave-sbe-block-editor'));
 });
 

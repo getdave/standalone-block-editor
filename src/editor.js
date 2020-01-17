@@ -12,7 +12,7 @@ import Header from 'components/header';
 import Sidebar from 'components/sidebar';
 import BlockEditor from 'components/block-editor';
 
-function Editor({ settings={} }) {
+function Editor({ settings }) {
     return (
         <SlotFillProvider>
             <DropZoneProvider>
