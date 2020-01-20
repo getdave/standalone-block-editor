@@ -9,93 +9,84 @@ import { serialize, parse } from '@wordpress/blocks';
 import { uploadMedia } from '@wordpress/media-utils';
 
 import {
-    BlockEditorKeyboardShortcuts,
-    BlockEditorProvider,
-    BlockList,
-    BlockInspector,
-    WritingFlow,
-    ObserveTyping,
+	BlockEditorKeyboardShortcuts,
+	BlockEditorProvider,
+	BlockList,
+	BlockInspector,
+	WritingFlow,
+	ObserveTyping,
 } from '@wordpress/block-editor';
-import {
-    Popover,
-    SlotFillProvider,
-    DropZoneProvider,
-} from '@wordpress/components';
-
 
 /**
  * Internal dependencies
  */
 import Sidebar from 'components/sidebar';
 
-function BlockEditor({settings: _settings}) {
-    const [blocks, updateBlocks] = useState( [] );
-    const { createInfoNotice } = useDispatch('core/notices');
+function BlockEditor( { settings: _settings } ) {
+	const [ blocks, updateBlocks ] = useState( [] );
+	const { createInfoNotice } = useDispatch( 'core/notices' );
 
-    const canUserCreateMedia = useSelect((select) => {
-        const _canUserCreateMedia = select('core').canUser('create', 'media');
-        return _canUserCreateMedia || _canUserCreateMedia !== false;
-    }, []);
+	const canUserCreateMedia = useSelect( ( select ) => {
+		const _canUserCreateMedia = select( 'core' ).canUser( 'create', 'media' );
+		return _canUserCreateMedia || _canUserCreateMedia !== false;
+	}, [] );
 
-    const settings = useMemo(() => {
-        if (!canUserCreateMedia) {
-            return _settings;
-        }
-        return {
-            ..._settings,
-            mediaUpload({ onError, ...rest }) {
-                uploadMedia({
-                    wpAllowedMimeTypes: _settings.allowedMimeTypes,
-                    onError: ({ message }) => onError(message),
-                    ...rest,
-                });
-            },
-        };
-    }, [canUserCreateMedia, _settings]);
+	const settings = useMemo(() => {
+		if ( ! canUserCreateMedia ) {
+			return _settings;
+		}
+		return {
+			..._settings,
+			mediaUpload( { onError, ...rest } ) {
+				uploadMedia( {
+					wpAllowedMimeTypes: _settings.allowedMimeTypes,
+					onError: ( { message } ) => onError( message ),
+					...rest,
+				} );
+			},
+		};
+	}, [ canUserCreateMedia, _settings ] );
 
-    useEffect(() => {
-        const storedBlocks = localStorage.getItem('getdavesbeBlocks');
+	useEffect( () => {
+		const storedBlocks = window.localStorage.getItem( 'getdavesbeBlocks' );
 
-        if (storedBlocks && storedBlocks.length) {
-            updateBlocks(parse(storedBlocks));
-            createInfoNotice('Blocks loaded', {
-                type: 'snackbar',
-                isDismissible: true,
-            });
-        }
+		if ( storedBlocks && storedBlocks.length ) {
+			updateBlocks( parse( storedBlocks ) );
+			createInfoNotice( 'Blocks loaded', {
+				type: 'snackbar',
+				isDismissible: true,
+			} );
+		}
+	}, [] );
 
-    },[])
+	function persistBlocks( newBlocks ) {
+		updateBlocks( newBlocks );
+		window.localStorage.setItem( 'getdavesbeBlocks', serialize( newBlocks ) );
+	}
 
+	return (
+		<div className="getdavesbe-block-editor">
+			<BlockEditorProvider
+				value={ blocks }
+				onInput={ updateBlocks }
+				onChange={ persistBlocks }
+				settings={ settings }
+			>
+				<Sidebar.InspectorFill>
+					<BlockInspector />
+				</Sidebar.InspectorFill>
+				<div className="editor-styles-wrapper">
+					<BlockEditorKeyboardShortcuts />
+					<WritingFlow>
+						<ObserveTyping>
+							<BlockList className="getdavesbe-block-editor__block-list" />
+						</ObserveTyping>
+					</WritingFlow>
+				</div>
+			</BlockEditorProvider>
 
-    function persistBlocks(blocks) {
-        updateBlocks(blocks);
-        localStorage.setItem('getdavesbeBlocks', serialize(blocks));
-    }
-
-
-    return (
-        <div className="getdavesbe-block-editor">
-            <BlockEditorProvider
-                value={blocks}
-                onInput={updateBlocks}
-                onChange={persistBlocks}
-                settings={settings}
-            >
-                <Sidebar.InspectorFill>
-                    <BlockInspector />
-                </Sidebar.InspectorFill>
-                <div className="editor-styles-wrapper">
-                    <BlockEditorKeyboardShortcuts />
-                    <WritingFlow>
-                        <ObserveTyping>
-                            <BlockList className="getdavesbe-block-editor__block-list"/>
-                        </ObserveTyping>
-                    </WritingFlow>
-                </div>
-            </BlockEditorProvider>
-
-        </div>
-    );
+		</div>
+	);
 }
 
 export default BlockEditor;
