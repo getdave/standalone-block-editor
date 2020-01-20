@@ -1,0 +1,15 @@
+    const [blocks, updateBlocks] = useState( [] );
+
+    useEffect(() => {
+        const storedBlocks = localStorage.getItem('getDaveBlocks');
+
+        if (storedBlocks && storedBlocks.length) {
+            updateBlocks(parse(storedBlocks));
+        }
+    },[]);
+
+    function persistBlocks(blocks) {
+        updateBlocks(blocks);
+        // console.log(blocks);
+        localStorage.setItem('getDaveBlocks', serialize(blocks));
+    }

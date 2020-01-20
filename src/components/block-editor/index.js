@@ -22,7 +22,6 @@ import {
     DropZoneProvider,
 } from '@wordpress/components';
 
-
 /**
  * Internal dependencies
  */
@@ -31,15 +30,26 @@ import Sidebar from 'components/sidebar';
 function BlockEditor({settings}) {
     const [blocks, updateBlocks] = useState( [] );
 
+    useEffect(() => {
+        const storedBlocks = localStorage.getItem('getDaveBlocks');
 
+        if (storedBlocks && storedBlocks.length) {
+            updateBlocks(parse(storedBlocks));
+        }
+    },[]);
 
+    function persistBlocks(blocks) {
+        updateBlocks(blocks);
+        // console.log(blocks);
+        localStorage.setItem('getDaveBlocks', serialize(blocks));
+    }
 
     return (
         <div className="getdavesbe-block-editor">
             <BlockEditorProvider
                 value={blocks}
                 onInput={updateBlocks}
-                onChange={updateBlocks}
+                onChange={persistBlocks}
                 settings={settings}
             >
                 <Sidebar.InspectorFill>
