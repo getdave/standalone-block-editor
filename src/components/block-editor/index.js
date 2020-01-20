@@ -28,49 +28,10 @@ import {
  */
 import Sidebar from 'components/sidebar';
 
-function BlockEditor({settings: _settings}) {
+function BlockEditor({settings}) {
     const [blocks, updateBlocks] = useState( [] );
-    const { createInfoNotice } = useDispatch('core/notices');
-
-    const canUserCreateMedia = useSelect((select) => {
-        const _canUserCreateMedia = select('core').canUser('create', 'media');
-        return _canUserCreateMedia || _canUserCreateMedia !== false;
-    }, []);
-
-    const settings = useMemo(() => {
-        if (!canUserCreateMedia) {
-            return _settings;
-        }
-        return {
-            ..._settings,
-            mediaUpload({ onError, ...rest }) {
-                uploadMedia({
-                    wpAllowedMimeTypes: _settings.allowedMimeTypes,
-                    onError: ({ message }) => onError(message),
-                    ...rest,
-                });
-            },
-        };
-    }, [canUserCreateMedia, _settings]);
-
-    useEffect(() => {
-        const storedBlocks = localStorage.getItem('getdavesbeBlocks');
-
-        if (storedBlocks && storedBlocks.length) {
-            updateBlocks(parse(storedBlocks));
-            createInfoNotice('Blocks loaded', {
-                type: 'snackbar',
-                isDismissible: true,
-            });
-        }
-
-    },[])
 
 
-    function persistBlocks(blocks) {
-        updateBlocks(blocks);
-        localStorage.setItem('getdavesbeBlocks', serialize(blocks));
-    }
 
 
     return (
@@ -78,7 +39,7 @@ function BlockEditor({settings: _settings}) {
             <BlockEditorProvider
                 value={blocks}
                 onInput={updateBlocks}
-                onChange={persistBlocks}
+                onChange={updateBlocks}
                 settings={settings}
             >
                 <Sidebar.InspectorFill>
