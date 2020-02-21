@@ -399,7 +399,7 @@ via it's own subcomponent [`<BlockEdit>`](https://github.com/WordPress/gutenberg
 
 These are some of the most complex and involved components within the `@wordpress/block-editor` package. That said, if you want to have a strong grasp of how the editor works at a fundamental level, I strongly advise making a study of these components. I leave this as an exercise for the reader!
 
-### Utility component in our custom block editor
+### Utility components in our custom block editor
 
 Jumping back to our own custom `<BlockEditor>` component, it is also worth noting the following "utility" components.
 
