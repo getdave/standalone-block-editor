@@ -182,13 +182,9 @@ https://github.com/WordPress/gutenberg/tree/4c472c3443513d070a50ba1e96f3a4768614
 
 ## Registering and Rendering our custom block editor
 
-With the above in place, we're now finally ready to render a Block Editor into
-the Admin page's HTML.
+With the PHP above in place, we're now finally ready to use JavaScript to render a Block Editor into the Admin page's HTML.
 
-Inside our main `src/index.js` file we first pull in required JS packages and
-import our CSS styles (note using Sass requires [extending the default
-`@wordpress/scripts` Webpack
-config](https://github.com/getdave/standalone-block-editor/blob/974a59dcbc539a0595e8fa34670e75ec541853ab/webpack.config.js#L13)).
+Inside our main `src/index.js` file we first pull in required JS packages and import our CSS styles (note using Sass requires [extending the default `@wordpress/scripts` Webpack config](https://github.com/getdave/standalone-block-editor/blob/974a59dcbc539a0595e8fa34670e75ec541853ab/webpack.config.js#L13)).
 
 ```js
 // src/index.js
