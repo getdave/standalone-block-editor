@@ -510,21 +510,16 @@ some state to store our Blocks as an array:
 const [ blocks, updateBlocks ] = useState( [] );
 ```
 
-https://github.com/getdave/standalone-block-editor/blob/3f682755a33c68f8a71cdf7f72a87e789dac6d2c/src/components/block-editor/index.js#L26
-
-As mentioned earlier, `blocks` is passed to the "controlled" component `<BlockEditorProvider>` as its
-`value` prop. This "hydrates" it with an initial set of Blocks. Similarly, the
-`updateBlocks` setter is hooked up to the `onInput` callback on
-`<BlockEditorProvider>` which ensures that our block state is kept in sync with
-changes made to blocks within the editor.
+As mentioned earlier, `blocks` is passed to the "controlled" component `<BlockEditorProvider>` as its `value` prop. This "hydrates" it with an initial set of Blocks. Similarly, the `updateBlocks` setter is hooked up to the `onInput` callback on `<BlockEditorProvider>` which ensures that our block state is kept in sync with changes made to blocks within the editor.
 
 ### Saving Block data
 
 If we now turn our attention to the `onChange` handler, we will notice it is
-hooked up to a function `persistBlocks` which is defined as follows:
+hooked up to a function `persistBlocks()` which is defined as follows:
 
 ```js
 // src/components/block-editor/index.js
+
 function persistBlocks( newBlocks ) {
     updateBlocks( newBlocks );
     window.localStorage.setItem( 'getdavesbeBlocks', serialize( newBlocks ) );
@@ -534,9 +529,7 @@ function persistBlocks( newBlocks ) {
 This function accepts an array of "committed" block changes and calls the state
 setter `updateBlocks`. In addition to this however, it also stores the blocks
 within LocalStorage under the key `getdavesbeBlocks`. In order to achieve this
-the Block data is serialized into [Gutenberg "Block
-Grammar"](https://developer.wordpress.org/block-editor/principles/key-concepts/#blocks)
-format, meaning it can be safely stored as a string.
+the Block data is serialized into [Gutenberg "Block Grammar"](https://developer.wordpress.org/block-editor/principles/key-concepts/#blocks) format, meaning it can be safely stored as a string.
 
 If we open DeveloperTools and inspect our LocalStorage we will see serialized
 Block data stored and updated as changes occur within the editor. Below is an
@@ -552,20 +545,22 @@ example of the format:
 <!-- /wp:paragraph -->
 ```
 
-### Retrieving previous Block data
+### Retrieving previous block data
 
 Having persistence in place is all well and good, but it's useless unless that
-data is retrieved and restored within the editor upon each instantiation.
+data is retrieved and _restored_ within the editor upon each full page reload.
 
 Accessing data is a side effect, so naturally we reach for our old (new!?)
 friend the `useEffect` hook to handle this.
 
-```js
+```jsx
+// src/components/block-editor/index.js
+
 useEffect( () => {
     const storedBlocks = window.localStorage.getItem( 'getdavesbeBlocks' );
 
     if ( storedBlocks && storedBlocks.length ) {
-        updateBlocks( parse( storedBlocks ) );
+        updateBlocks( () => parse( storedBlocks ) );
         createInfoNotice( 'Blocks loaded', {
             type: 'snackbar',
             isDismissible: true,
@@ -574,20 +569,31 @@ useEffect( () => {
 }, [] );
 ```
 
-In this handler (which runs on the equivalent of the `componentDidMount`
-lifecycle hook), we:
+In this handler, we:
 
 * Grab the serialized block data from local storage.
-* Convert the serialzed blocks back to JavaScript objects using the `parse()`
+* Convert the serialized blocks back to JavaScript objects using the `parse()`
   utility.
 * Call the state setter `updateBlocks` causing the `blocks` value to be updated
   in state to reflect the blocks retrieved from LocalStorage.
 
 As a result of these operations the controlled `<BlockEditorProvider>` component
 is updated with the blocks restored from LocalStorage causing the editor to
-reflect this.
+show these blocks.
 
-Finally, for good measure we generate a notice which will display in our `<Notice>` component as
-a "snackbar" notice.
+Finally, for good measure we generate a notice - which will display in our `<Notice>` component as a "snackbar" notice - to indicate that the blocks have been restored.
 
-## Conclusion
+## Wrapping up
+
+If you've made it this far then congratulations! I hope you now have a better understanding of how the block editor works under the hood.
+
+In addition, you've reviewed an working example of the code required to implement your own custom functioning block editor. This information should prove useful, especially as Gutenberg expands beyond editing just the `Post` and into Widgets, Full Site Editing and beyond!
+
+
+The full code for the custom functioning block editor we've just built is [available on Github](https://github.com/getdave/standalone-block-editor). I encourage you to download and try it out for yourself. Experiment, then and take things even further!
+
+My thanks to `@epiqueras` (Enrique Piqueras) for his technical review of this tutorial and all his work on the "Edit Site" feature of the Full Site Editing project in Gutenberg, from which I was able to learn so much.
+
+
+
+
