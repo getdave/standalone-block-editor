@@ -63,8 +63,6 @@ This is great and exactly what we need! Indeed, it is the main package we'll be 
 
 However, before we can get to working with this package in code, we're going to need to create a home for our editor within WP Admin.
 
-Let's get going!
-
 ## Creating the custom "Block Editor" page in WP Admin
 
 As a first step, we need to create a custom page within WP Admin.
