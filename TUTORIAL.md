@@ -12,7 +12,7 @@ As a result, I made it a personal goal to deep dive into the editor and document
 
 To achieve this, I took some time to put together my own **fully functioning block editor "instance"** within WordPress. In this post, I will take you through how I did this, introducing you to the key packages and components along the way.
 
-By the end of this article, I hope to provide you with a good understanding of how the block editor works and perhaps (some of) the knowledge required to put together you're own block editor instances.
+By the end of this article, I hope to provide you with a good understanding of how the block editor works and perhaps (some of) the knowledge required to put together your own block editor instances.
 
 ## What we're going to be building
 
