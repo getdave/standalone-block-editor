@@ -295,7 +295,7 @@ complex of the components we have encountered thus far.
 There's a lot going on so let's break this down!
 
 ### Understanding the render
-To start, let's focus on what is being rendered by the component:
+To start, let's focus on what is being rendered by the `<BlockEditor>` component:
 
 ```js
 // src/components/block-editor/index.js
@@ -366,10 +366,9 @@ It's also worth recalling that the component accepts a `settings` prop. This acc
 
 ### Understanding the `<BlockList>` component
 
-After `<BlockEditorProvider>` the next most interesting component is [`<BlockList>`](https://github.com/WordPress/gutenberg/blob/e38dbe958c04d8089695eb686d4f5caff2707505/packages/block-editor/src/components/block-list/index.js).
+Alongside `<BlockEditorProvider>` the next most interesting component is [`<BlockList>`](https://github.com/WordPress/gutenberg/blob/e38dbe958c04d8089695eb686d4f5caff2707505/packages/block-editor/src/components/block-list/index.js).
 
-Ths one of the most important components in the editor as it's role
-is to **render a list of Blocks into the editor**.
+This is one of the most important components as it's role is to **render a list of Blocks into the editor**.
 
 It does this in part thanks to being placed as a child of `<BlockEditorProvider>` which affords it full access to all information about the state of the current Blocks in the editor.
 
