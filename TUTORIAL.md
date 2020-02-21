@@ -137,9 +137,10 @@ With this in place, we can then safely register our main JavaScript file using t
 ```php
 // init.php
 
-// Variable assignment omitted for brevity - [see here for details](https://github.com/getdave/standalone-block-editor/blob/974a59dcbc539a0595e8fa34670e75ec541853ab/init.php#L19).
 wp_enqueue_script( $script_handle, $script_url, $script_asset['dependencies'], $script_asset['version'] );
 ```
+
+To save time and space, the assignment of the `$script_` variables has been omitted. You can [review these here see here](https://github.com/getdave/standalone-block-editor/blob/974a59dcbc539a0595e8fa34670e75ec541853ab/init.php#L19).
 
 Note that we register our script dependencies (`$script_asset['dependencies']`) as the 3rd argument - these deps are being
 dynamically generated using [@wordpress/dependency-extraction-webpack-plugin](https://developer.wordpress.org/block-editor/packages/packages-dependency-extraction-webpack-plugin/) which will
