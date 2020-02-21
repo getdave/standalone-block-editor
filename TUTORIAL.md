@@ -219,9 +219,7 @@ Let's take a closer look at the `<Editor>` component we saw being used above.
 Despite its name, this _is not_ the actual core of the block editor. Rather it is a _wrapper_ component we've created to contain the components which form the main body of our custom editor.
 
 ### Dependencies
-The first thing we do is to pull in some dependencies. The most important of these are the internal components `BlockEditor` and `Sidebar`, which we will explore in greater detail shortly.
-
-The remaining components are more static elements which form the layout and surrounding UI of the editor.
+The first thing we do inside `<Editor>` is to pull in some dependencies.
 
 ```jsx
 // src/editor.js
@@ -231,6 +229,10 @@ import Header from 'components/header';
 import Sidebar from 'components/sidebar';
 import BlockEditor from 'components/block-editor';
 ```
+
+The most important of these are the internal components `BlockEditor` and `Sidebar`, which we will explore in greater detail shortly.
+
+The remaining components are largely static elements which form the layout and surrounding UI of the editor.
 
 ### Editor Render
 With these components available we can proceed to define our `<Editor>` component.
