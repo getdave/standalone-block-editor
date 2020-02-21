@@ -30,18 +30,6 @@ Our editor will have the following features:
 
 With that in mind, let's start taking our first steps towards building this.
 
-## The "Core" of the Editor
-
-Whilst the Gutenberg Editor is comprised of many moving parts, at it's core is the `@wordpress/block-editor` package.
-
-It's role is perhaps best summarised by its own `README` file:
-
-> This module allows you to create and use standalone block editors.
-
-This is great and exactly what we need! Indeed, it is the main package we'll be using to create our custom block editor instance.
-
-However, before we can get to working with this package in code, we're going to need to do some setup.
-
 ## Plugin setup and organisation
 
 Our custom editor is going to be built as a WordPress Plugin. To keep things simple. we'll call this `Standalone Block Editor Demo` because that is what is does. Nice!
@@ -61,7 +49,21 @@ The only item not shown above is the `build/` directory, which is where our _com
 
 **Note:** throughout this tutorial, filename references will be placed in a comment at the top of each code snippet so you can follow along.
 
-With the basic file structure in place then, we can start to create a home for our editor within WP Admin.
+With our basic file structure in place, we can now start looking at what package we're going to need.
+
+## The "Core" of the Editor
+
+Whilst the Gutenberg Editor is comprised of many moving parts, at it's core is the `@wordpress/block-editor` package.
+
+It's role is perhaps best summarised by its own `README` file:
+
+> This module allows you to create and use standalone block editors.
+
+This is great and exactly what we need! Indeed, it is the main package we'll be using to create our custom block editor instance.
+
+However, before we can get to working with this package in code, we're going to need to create a home for our editor within WP Admin.
+
+Let's get going!
 
 ## Creating the custom "Block Editor" page in WP Admin
 
