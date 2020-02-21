@@ -496,6 +496,8 @@ We've come a long way on our journey to create a custom block editor. But there 
 one major area left to touch upon - Block persistance; that is the act of having our
 Blocks saved and **available _between_ page refreshes**.
 
+![alt text](screenshots/block-persistance.gif "Screencapture showing added Blocks being restored between page refreshes.")
+
 As this is only an _experiment_ we've opted to utilise the browser's
 `localStorage` API to handle saving Block data. In a real-world scenario however
 you'd like choose a more reliable and robust system (eg: a database).
