@@ -21,18 +21,21 @@ This repo is by no means perfect and should not been seen as an "official" way t
 
 ## Getting Started
 
-Clone this repo into the `plugins` directory of a WordPress installation.
+1. Clone this repo into the `plugins` directory of a WordPress installation.
 
 ```bash
-cd {{mylocalwp}}/wp-content/
+// Change into your local WP install's Plugin directory.
+cd {{mylocalwp}}/wp-content/plugins/
+
+// Clone this repo into that directory.
 git clone git@github.com:getdave/standalone-block-editor.git
 ```
 
-Install the dependencies using `npm install`.
+2. Install the dependencies using `npm install`.
 
-Build the Plugin by running `npm run build` (or alternatively run `npm start` to watch build automatically on file change).
+3. Build the Plugin by running `npm run build` (or alternatively run `npm start` to watch build automatically on file change).
 
-Activate the Plugin from within WPAdmin.
+4. Activate the Plugin from within WPAdmin.
 
 ## More Information
 
