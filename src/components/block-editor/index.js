@@ -51,7 +51,7 @@ function BlockEditor( { settings: _settings } ) {
 		const storedBlocks = window.localStorage.getItem( 'getdavesbeBlocks' );
 
 		if ( storedBlocks && storedBlocks.length ) {
-			updateBlocks( parse( storedBlocks ) );
+			updateBlocks( () => parse( storedBlocks ) );
 			createInfoNotice( 'Blocks loaded', {
 				type: 'snackbar',
 				isDismissible: true,
