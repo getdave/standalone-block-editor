@@ -89,7 +89,7 @@ Note the reference to a function `getdave_sbe_render_block_editor` which is the 
 
 As the block editor is a React powered application, we now need to output some HTML into our custom page into which the JavaScript can render the block editor.
 
-To do this we need to define our `getdave_sbe_render_block_editor` from the step above.
+To do this we need to look at our `getdave_sbe_render_block_editor` function referenced in the step above.
 
 ```php
 // init.php
@@ -106,7 +106,9 @@ function getdave_sbe_render_block_editor() {
 }
 ```
 
-We've included the `id` attribute `getdave-sbe-block-editor`. Keep a note of that,  a we'll be using it shortly.
+Here we simply output some basic placeholder HTML.
+
+Note that we've included an `id` attribute `getdave-sbe-block-editor`. Keep a note of that, a we'll be using it shortly.
 
 ### Enqueuing JavaScript and CSS
 
