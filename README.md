@@ -23,7 +23,7 @@ This repo is by no means perfect and should not been seen as an "official" way t
 
 If you'd like to play around with this custom block editor then:
 
-1. Clone this repo into the `plugins` directory of a WordPress installation.
+Clone this repo into the `plugins` directory of a WordPress installation.
 
 ```bash
 // Change into your local WP install's Plugin directory.
@@ -33,17 +33,17 @@ cd {{mylocalwp}}/wp-content/plugins/
 git clone git@github.com:getdave/standalone-block-editor.git
 ```
 
-2. Change into the cloned directory:
+Change into the cloned directory:
 ```bash
 cd standalone-block-editor/
 ```
 
-3. Install npm dependencies
+Install npm dependencies
 ```bash
 npm install
 ```
 
-4. Build the Plugin:
+Build the Plugin:
 
 ```bash
 npm run build
@@ -55,7 +55,7 @@ npm run build
 npm run start
 ```
 
-5. **Activate the Plugin** from within WP Admin.
+**Activate the Plugin** from within WP Admin.
 
 ## More Information
 
