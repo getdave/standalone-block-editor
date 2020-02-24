@@ -1,9 +1,13 @@
+/**
+ * WordPress dependencies
+ */
 import {
 	Popover,
 	SlotFillProvider,
 	DropZoneProvider,
-	navigateRegions,
 } from '@wordpress/components';
+
+import { __experimentalEditorSkeleton as EditorSkeleton } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
@@ -17,16 +21,20 @@ function Editor( { settings } ) {
 	return (
 		<SlotFillProvider>
 			<DropZoneProvider>
-				<div className="getdavesbe-block-editor-layout">
-					<Notices />
-					<Header />
-					<Sidebar />
-					<BlockEditor settings={ settings } />
-				</div>
+				<EditorSkeleton
+					header={ <Header /> }
+					sidebar={<Sidebar />}
+					content={
+						<>
+							<Notices />
+							<BlockEditor settings={settings} />
+						</>
+					}
+				/>
 				<Popover.Slot />
 			</DropZoneProvider>
 		</SlotFillProvider>
 	);
 }
 
-export default navigateRegions( Editor );
+export default Editor;
