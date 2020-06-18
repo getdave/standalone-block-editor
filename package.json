@@ -18,7 +18,9 @@
   },
   "devDependencies": {
     "@wordpress/env": "^2.0.0",
+    "@wordpress/data-controls": "^1.14.0",
     "@wordpress/eslint-plugin": "^7.2.0",
+    "@wordpress/keycodes": "^2.13.0",
     "@wordpress/scripts": "^12.2.0",
     "autoprefixer": "^9.8.6",
     "css-loader": "^4.3.0",
