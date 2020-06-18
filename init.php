@@ -17,17 +17,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 function getdave_sbe_block_editor_init( $hook ) {
-
+	global $current_screen;
 	if ( 'toplevel_page_getdavesbe' !== $hook ) {
 		return;
 	}
+
+	$current_screen->is_block_editor( true );
 
 	$script_handle = 'getdave-sbe-scripts';
 
 	// Enqueue scripts with @wordpress package deps extracted via `@wordpress/wp-scripts
 	// See:
-	// - https://developer.wordpress.org/block-editor/packages/packages-scripts/#webpack-config
-	// - https://developer.wordpress.org/block-editor/packages/packages-dependency-extraction-webpack-plugin/
+	// - https://developer.wordpress.org/block-editor/packages/packages-scripts/#webpack-config.
+	// - https://developer.wordpress.org/block-editor/packages/packages-dependency-extraction-webpack-plugin/.
 	$script_path       = 'build/index.js';
 	$script_asset_path = dirname( __FILE__ ) . '/build/index.asset.php';
 	$script_asset      = file_exists( $script_asset_path )
@@ -38,9 +40,11 @@ function getdave_sbe_block_editor_init( $hook ) {
 		);
 	$script_url        = plugins_url( $script_path, __FILE__ );
 
+
+
 	wp_enqueue_script( $script_handle, $script_url, $script_asset['dependencies'], $script_asset['version'] );
 
-	// Inline the Editor Settings
+	// Inline the Editor Settings.
 	$settings = getdave_sbe_get_block_editor_settings();
 	wp_add_inline_script( $script_handle, 'window.getdaveSbeSettings = ' . wp_json_encode( $settings ) . ';' );
 
@@ -50,10 +54,12 @@ function getdave_sbe_block_editor_init( $hook ) {
 		'wp.blocks.unstable__bootstrapServerSideBlockDefinitions(' . wp_json_encode( get_block_editor_server_block_settings() ) . ');'
 	);
 
-	// Editor default styles
+	// Editor default styles.
+
+	wp_enqueue_script( 'wp-format-library' );
 	wp_enqueue_style( 'wp-format-library' );
 
-	// Styles
+	// Styles.
 	wp_enqueue_style(
 		'getdave-sbe-styles', // Handle.
 		plugins_url( 'build/index.css', __FILE__ ), // Block editor CSS.
