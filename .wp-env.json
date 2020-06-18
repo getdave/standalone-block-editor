@@ -1,0 +1,6 @@
+{
+    "core": "WordPress/WordPress#master",
+    "port": 7575,
+    "testsPort": 7576,
+	"plugins": ["."]
+}
