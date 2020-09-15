@@ -15,7 +15,8 @@ module.exports = {
 		...defaultConfig.resolve,
 		// alias directories to paths you can use in import() statements
 		alias: {
-			components: path.join( paths.srcDir, 'components' ),
+			components: path.join(paths.srcDir, "components"),
+			store: path.join(paths.srcDir, "store"),
 		},
 	},
 };
