@@ -7,7 +7,7 @@ import {
 	DropZoneProvider,
 } from '@wordpress/components';
 
-import { __experimentalEditorSkeleton as EditorSkeleton } from '@wordpress/block-editor';
+import { InterfaceSkeleton } from '@wordpress/interface';
 
 /**
  * Internal dependencies
@@ -21,13 +21,13 @@ function Editor( { settings } ) {
 	return (
 		<SlotFillProvider>
 			<DropZoneProvider>
-				<EditorSkeleton
+				<InterfaceSkeleton
 					header={ <Header /> }
-					sidebar={<Sidebar />}
+					sidebar={ <Sidebar /> }
 					content={
 						<>
 							<Notices />
-							<BlockEditor settings={settings} />
+							<BlockEditor settings={ settings } />
 						</>
 					}
 				/>
