@@ -1,9 +1,9 @@
 
 .getdavesbe-sidebar {
 	background: $white;
-	border-left: $border-width solid $light-gray-500;
+	border-left: $border-width solid $gray-200;
 	bottom: 0;
-	color: $dark-gray-500;
+	color: $gray-900;
 	height: 100vh;
 	overflow: hidden;
 	position: fixed;
@@ -35,7 +35,7 @@
 		margin-top: -1px;
 
 		> .components-panel__header {
-			background: $light-gray-200;
+			background: $gray-200;
 		}
 	}
 

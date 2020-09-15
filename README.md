@@ -21,16 +21,18 @@ This repo is by no means perfect and should not been seen as an "official" way t
 
 ## Getting Started
 
-If you'd like to play around with this custom block editor then:
+If you'd like to play around with this custom block editor then you have 2 options:
 
-Clone this repo into the `plugins` directory of a WordPress installation.
+1. Use the WordPress Docker environment bundled with this Repo (provided via [`@wordpress/env`](https://developer.wordpress.org/block-editor/packages/packages-env/).
+2. Clone this repo directly into the `plugins` directory of a WordPress installation.
 
+Either way you'll want to take the following steps:
+
+### Clone Repo
 ```bash
-// Change into your local WP install's Plugin directory.
-cd {{mylocalwp}}/wp-content/plugins/
-
 // Clone this repo into that directory.
 git clone git@github.com:getdave/standalone-block-editor.git
+
 ```
 
 Change into the cloned directory:
@@ -38,24 +40,45 @@ Change into the cloned directory:
 cd standalone-block-editor/
 ```
 
+### Install Dependencies
+
 Install npm dependencies
 ```bash
 npm install
 ```
 
-Build the Plugin:
+*Important*: check you have [the necessary prerequisites to run `wp-env`](https://developer.wordpress.org/block-editor/packages/packages-env/#prerequisites).
+
+### Start the WordPress Environment (optional)
+
+Start the environment (if using):
+
+```bash
+npm run wp-env start
+```
+
+You should now be able to login to WordPress at [`localhost:7575/wp-admin`](http://localhost:7575/wp-admin):
+
+* `username`: `admin`
+* `password`: `password`
+
+### Build the Plugin
+
+Open a new terminal in the same [`standalone-block-editor/`] directory, then build the Plugin:
 
 ```bash
 npm run build
 ```
 
-...or alternatively to watch build automatically on file change:
+...or if you'd prefer to watch and build _automatically_ on file change run:
 
 ```bash
 npm run start
 ```
 
-**Activate the Plugin** from within WP Admin.
+### Activate the Plugin
+
+Open the Plugins page within WPAdmin [`localhost:7575/wp-admin/plugins.php`](http://localhost:7575/wp-admin/plugins.php) and activate the `Standalone Block Editor Demo` Plugin.
 
 ## More Information
 
