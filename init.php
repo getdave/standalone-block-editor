@@ -40,8 +40,6 @@ function getdave_sbe_block_editor_init( $hook ) {
 		);
 	$script_url        = plugins_url( $script_path, __FILE__ );
 
-
-
 	wp_enqueue_script( $script_handle, $script_url, $script_asset['dependencies'], $script_asset['version'] );
 
 	// Inline the Editor Settings.
@@ -101,7 +99,7 @@ function getdave_sbe_render_block_editor() {
 	?>
 	<div
 		id="getdave-sbe-block-editor"
-		class="getdave-sbe-block-editor"
+		class="getdave-sbe-block-editor block-editor"
 	>
 		Loading Editor...
 	</div>

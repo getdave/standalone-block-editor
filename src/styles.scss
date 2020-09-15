@@ -12,15 +12,41 @@
 @import "components/sidebar/styles";
 @import "components/block-editor/styles";
 
-
-// In order to use mix-blend-mode, this element needs to have an explicitly set background-color.
-// We scope it to .wp-toolbar to be wp-admin only, to prevent bleed into other implementations.
+// In order to use mix-blend-mode, this element needs to have an explicitly set background-color
+// We scope it to .wp-toolbar to be wp-admin only, to prevent bleed into other implementations
 html.wp-toolbar {
 	background: $white;
 }
 
-body.toplevel_page_getdavesbe {
-	@include wp-admin-reset(".getdave-sbe-block-editor");
+body.block-editor-page {
+	@include wp-admin-reset( ".block-editor" );
+}
+
+.getdave-sbe-block-editor {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	min-height: calc(100vh - 32px);
+}
+
+.editor-styles-wrapper {
+	width: 100%;
+
+	@include break-small {
+		width: calc(100% - #{$sidebar-width});
+	}
+	// We need the styles scoped to "body" to be added to the
+	// div.editor-styles wrapper
+	font-family: $editor-font;
+	font-size: $editor-font-size;
+	line-height: $editor-line-height;
+	color: $gray-900;
+
+	// Important all other selectors scoped underneath
+	// `div.editor-styles-wrapper`
+	@import "~@wordpress/editor/src/editor-styles.scss";
 }
 
 .getdave-sbe-block-editor,
