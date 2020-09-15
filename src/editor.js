@@ -5,6 +5,7 @@ import {
 	Popover,
 	SlotFillProvider,
 	DropZoneProvider,
+	FocusReturnProvider,
 } from '@wordpress/components';
 
 import { InterfaceSkeleton } from '@wordpress/interface';
@@ -21,17 +22,20 @@ function Editor( { settings } ) {
 	return (
 		<SlotFillProvider>
 			<DropZoneProvider>
-				<InterfaceSkeleton
-					header={ <Header /> }
-					sidebar={ <Sidebar /> }
-					content={
-						<>
-							<Notices />
-							<BlockEditor settings={ settings } />
-						</>
-					}
-				/>
-				<Popover.Slot />
+				<FocusReturnProvider>
+					<InterfaceSkeleton
+						header={<Header />}
+						sidebar={<Sidebar />}
+						content={
+							<>
+								<Notices />
+								<BlockEditor settings={settings} />
+							</>
+						}
+					/>
+
+					<Popover.Slot />
+				</FocusReturnProvider>
 			</DropZoneProvider>
 		</SlotFillProvider>
 	);
