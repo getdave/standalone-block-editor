@@ -3,33 +3,33 @@ import { Button } from '@wordpress/components';
 import { withSelect, withDispatch } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import { displayShortcut } from '@wordpress/keycodes';
-import { undo as undoIcon } from '@wordpress/icons';
+import { redo as redoIcon } from '@wordpress/icons';
 
 
-function HistoryUndo( { hasUndo, undo, ...props } ) {
+function HistoryRedo( { hasRedo, redo, ...props } ) {
 	return (
 		<Button
 			{ ...props }
-			icon={ undoIcon }
-			label={ __( 'Undo' ) }
+			icon={ redoIcon }
+			label={ __( 'Red' ) }
 			shortcut={ displayShortcut.primary( 'z' ) }
-			// If there are no undo levels we don't want to actually disable this
+			// If there are no redo levels we don't want to actually disable this
 			// button, because it will remove focus for keyboard users.
 			// See: https://github.com/WordPress/gutenberg/issues/3486
-			aria-disabled={ ! hasUndo }
-			onClick={ hasUndo ? undo : undefined }
-			className="editor-history__undo"
+			aria-disabled={ ! hasRedo }
+			onClick={ hasRedo ? redo : undefined }
+			className="editor-history__redo"
 		/>
 	);
 }
 
-const EnhancedHistoryUndo = compose( [
+const EnhancedHistoryRedo = compose( [
 	withSelect( ( select ) => ( {
-		hasUndo: select( 'getdavesbe' ).hasUndo(),
+		hasRedo: select( 'getdavesbe' ).hasRedo(),
 	} ) ),
 	withDispatch( ( dispatch ) => ( {
-		undo: dispatch( 'getdavesbe' ).undo,
+		redo: dispatch( 'getdavesbe' ).redo,
 	} ) ),
-] )( HistoryUndo );
+] )( HistoryRedo );
 
-export default EnhancedHistoryUndo;
+export default EnhancedHistoryRedo;

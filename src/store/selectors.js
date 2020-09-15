@@ -1,24 +1,19 @@
 import { createRegistrySelector } from '@wordpress/data';
 
-/**
- * Returns true if any past editor history snapshots exist, or false otherwise.
- *
- * @param {Object} state Global application state.
- *
- * @return {boolean} Whether undo history exists.
- */
-export const hasEditorUndo = createRegistrySelector( ( select ) => () => {
-	return select( 'core' ).hasUndo();
-} );
 
-/**
- * Returns true if any future editor history snapshots exist, or false
- * otherwise.
- *
- * @param {Object} state Global application state.
- *
- * @return {boolean} Whether redo history exists.
- */
-export const hasEditorRedo = createRegistrySelector( ( select ) => () => {
-	return select( 'core' ).hasRedo();
-} );
+
+
+
+
+export const getBlocks = ( state ) => {
+	return state.present.blocks || [];
+}
+
+export const hasUndo = (state) => {
+	return state.past?.length;
+};
+
+export const hasRedo = (state) => {
+	return state.future?.length;
+};
+

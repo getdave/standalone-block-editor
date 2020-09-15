@@ -1,20 +1,21 @@
 import { dispatch } from '@wordpress/data-controls';
+import { UPDATE_BLOCKS, PERSIST_BLOCKS } from "./action-types";
+import { ActionCreators } from "redux-undo";
 
-/**
- * Returns an action object used in signalling that undo history should
- * restore last popped state.
- *
- * @yield {Object} Action object.
- */
-export function* redo() {
-	yield dispatch( 'core', 'redo' );
+
+export function undo() {
+	return ActionCreators.undo();
 }
 
-/**
- * Returns an action object used in signalling that undo history should pop.
- *
- * @yield {Object} Action object.
- */
-export function* undo() {
-	yield dispatch( 'core', 'undo' );
+export function redo() {
+	return ActionCreators.redo();
 }
+
+export function updateBlocks( blocks, persist = false ) {
+	return {
+		type: persist ? PERSIST_BLOCKS : UPDATE_BLOCKS,
+		blocks,
+	};
+}
+
+

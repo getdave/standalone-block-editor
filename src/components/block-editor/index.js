@@ -23,7 +23,8 @@ import {
 import Sidebar from 'components/sidebar';
 
 function BlockEditor( { settings: _settings } ) {
-	const [ blocks, updateBlocks ] = useState( [] );
+	const blocks = useSelect((select) => select("getdavesbe").getBlocks());
+	const { updateBlocks } = useDispatch("getdavesbe");
 	const { createInfoNotice } = useDispatch( 'core/notices' );
 
 	const canUserCreateMedia = useSelect( ( select ) => {
@@ -47,17 +48,17 @@ function BlockEditor( { settings: _settings } ) {
 		};
 	}, [ canUserCreateMedia, _settings ] );
 
-	useEffect( () => {
-		const storedBlocks = window.localStorage.getItem( 'getdavesbeBlocks' );
+	// useEffect( () => {
+	// 	const storedBlocks = window.localStorage.getItem( 'getdavesbeBlocks' );
 
-		if ( storedBlocks?.length ) {
-			handleUpdateBlocks(() => parse(storedBlocks));
-			createInfoNotice( 'Blocks loaded', {
-				type: 'snackbar',
-				isDismissible: true,
-			} );
-		}
-	}, [] );
+	// 	if ( storedBlocks?.length ) {
+	// 		handleUpdateBlocks(() => parse(storedBlocks));
+	// 		createInfoNotice( 'Blocks loaded', {
+	// 			type: 'snackbar',
+	// 			isDismissible: true,
+	// 		} );
+	// 	}
+	// }, [] );
 
 	/**
 	 * Wrapper for updating blocks. Required as `onInput` callback passed to
@@ -70,8 +71,9 @@ function BlockEditor( { settings: _settings } ) {
 	}
 
 	function handlePersistBlocks( newBlocks ) {
-		updateBlocks( newBlocks );
-		window.localStorage.setItem( 'getdavesbeBlocks', serialize( newBlocks ) );
+		updateBlocks( newBlocks, true );
+		// persistBlocks(newBlocks);
+		// window.localStorage.setItem( 'getdavesbeBlocks', serialize( newBlocks ) );
 	}
 
 	return (

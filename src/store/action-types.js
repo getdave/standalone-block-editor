@@ -1,0 +1,2 @@
+export const UPDATE_BLOCKS = "UPDATE_BLOCKS";
+export const PERSIST_BLOCKS = "PERSIST_BLOCKS";
