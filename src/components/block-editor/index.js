@@ -50,8 +50,8 @@ function BlockEditor( { settings: _settings } ) {
 	useEffect( () => {
 		const storedBlocks = window.localStorage.getItem( 'getdavesbeBlocks' );
 
-		if ( storedBlocks && storedBlocks.length ) {
-			updateBlocks( () => parse( storedBlocks ) );
+		if ( storedBlocks?.length ) {
+			handleUpdateBlocks(() => parse(storedBlocks));
 			createInfoNotice( 'Blocks loaded', {
 				type: 'snackbar',
 				isDismissible: true,
@@ -59,7 +59,17 @@ function BlockEditor( { settings: _settings } ) {
 		}
 	}, [] );
 
-	function persistBlocks( newBlocks ) {
+	/**
+	 * Wrapper for updating blocks. Required as `onInput` callback passed to
+	 * `BlockEditorProvider` is now called with more than 1 argument. Therefore
+	 * attempting to setState directly via `updateBlocks` will trigger an error
+	 * in React.
+	 */
+	function handleUpdateBlocks(blocks) {
+		updateBlocks( blocks );
+	}
+
+	function handlePersistBlocks( newBlocks ) {
 		updateBlocks( newBlocks );
 		window.localStorage.setItem( 'getdavesbeBlocks', serialize( newBlocks ) );
 	}
@@ -68,8 +78,8 @@ function BlockEditor( { settings: _settings } ) {
 		<div className="getdavesbe-block-editor">
 			<BlockEditorProvider
 				value={ blocks }
-				onInput={ updateBlocks }
-				onChange={ persistBlocks }
+				onInput={ handleUpdateBlocks }
+				onChange={ handlePersistBlocks }
 				settings={ settings }
 			>
 				<Sidebar.InspectorFill>
