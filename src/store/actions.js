@@ -5,18 +5,16 @@ import {
 	FETCH_BLOCKS_FROM_STORAGE,
 	PERSIST_BLOCKS_TO_STORAGE,
 } from "./action-types";
-import { ActionCreators } from "redux-undo";
+import { ActionCreators as ReduxUndo } from "redux-undo";
 
 
 export function undo() {
-	return ActionCreators.undo();
+	return ReduxUndo.undo();
 }
 
 export function redo() {
-	return ActionCreators.redo();
+	return ReduxUndo.redo();
 }
-
-
 
 export function *updateBlocks( blocks, persist = false ) {
 
