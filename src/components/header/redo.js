@@ -12,7 +12,7 @@ function HistoryRedo( { hasRedo, redo, ...props } ) {
 			{ ...props }
 			icon={ redoIcon }
 			label={ __( 'Red' ) }
-			shortcut={ displayShortcut.primary( 'z' ) }
+			shortcut={ displayShortcut.primary( 'x' ) }
 			// If there are no redo levels we don't want to actually disable this
 			// button, because it will remove focus for keyboard users.
 			// See: https://github.com/WordPress/gutenberg/issues/3486
