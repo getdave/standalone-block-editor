@@ -9,10 +9,8 @@ import { registerStore } from '@wordpress/data';
 import reducer from './reducer';
 import * as selectors from './selectors';
 import * as actions from './actions';
+import * as resolvers from "./resolvers";
 import controls from './controls';
-import { parse } from "@wordpress/blocks";
-
-
 
 /**
  * Module Constants
@@ -24,15 +22,7 @@ const store = registerStore(MODULE_KEY, {
 	selectors,
 	actions,
 	controls,
-	resolvers: {
-		*getBlocks() {
-			const rawBlocks = yield actions.fetchBlocksFromStorage();
-			const persist = false;
-			const blocks = parse(rawBlocks);
-			yield actions.updateBlocks(blocks, persist);
-			return blocks;
-		},
-	},
+	resolvers,
 });
 
 window.getDaveStore = store;
