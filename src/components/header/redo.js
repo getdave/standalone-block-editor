@@ -11,7 +11,7 @@ function HistoryRedo( { hasRedo, redo, ...props } ) {
 		<Button
 			{ ...props }
 			icon={ redoIcon }
-			label={ __( 'Red' ) }
+			label={ __( 'Redo' ) }
 			shortcut={ displayShortcut.primary( 'x' ) }
 			// If there are no redo levels we don't want to actually disable this
 			// button, because it will remove focus for keyboard users.
