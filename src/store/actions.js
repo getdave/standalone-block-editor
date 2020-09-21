@@ -1,4 +1,3 @@
-import { dispatch } from '@wordpress/data-controls';
 import {
 	UPDATE_BLOCKS,
 	PERSIST_BLOCKS,
