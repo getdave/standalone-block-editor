@@ -114,6 +114,7 @@ function getdave_sbe_get_block_editor_settings() {
 		// 'imageSizes'             => $available_image_sizes,
 		'isRTL'                  => is_rtl(),
 		// 'maxUploadFileSize'      => $max_upload_size,
+		'__experimentalBlockPatterns' => []
 	);
 	list( $color_palette, ) = (array) get_theme_support( 'editor-color-palette' );
 	list( $font_sizes, )    = (array) get_theme_support( 'editor-font-sizes' );
