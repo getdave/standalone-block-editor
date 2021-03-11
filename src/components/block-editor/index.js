@@ -82,11 +82,12 @@ function BlockEditor( { settings: _settings } ) {
 				onChange={ handlePersistBlocks }
 				settings={ settings }
 			>
+			    <BlockEditorKeyboardShortcuts.Register />
+			    <BlockEditorKeyboardShortcuts />
 				<Sidebar.InspectorFill>
 					<BlockInspector />
 				</Sidebar.InspectorFill>
 				<div className="editor-styles-wrapper">
-					<BlockEditorKeyboardShortcuts />
 					<WritingFlow>
 						<ObserveTyping>
 							<BlockList className="getdavesbe-block-editor__block-list" />
