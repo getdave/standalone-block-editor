@@ -9,6 +9,7 @@ import { serialize, parse } from '@wordpress/blocks';
 import { uploadMedia } from '@wordpress/media-utils';
 
 import {
+	BlockBreadcrumb,
 	BlockEditorKeyboardShortcuts,
 	BlockEditorProvider,
 	BlockList,
@@ -82,6 +83,7 @@ function BlockEditor( { settings: _settings } ) {
 				onChange={ handlePersistBlocks }
 				settings={ settings }
 			>
+        			<BlockBreadcrumb />
 				<Sidebar.InspectorFill>
 					<BlockInspector />
 				</Sidebar.InspectorFill>
