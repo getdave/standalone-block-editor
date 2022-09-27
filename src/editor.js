@@ -4,12 +4,12 @@
 import {
 	Popover,
 	SlotFillProvider,
-	DropZoneProvider,
 	FocusReturnProvider,
 } from '@wordpress/components';
 
-import { InterfaceSkeleton, FullscreenMode } from "@wordpress/interface";
-
+import { StrictMode } from '@wordpress/element';
+import { FullscreenMode, InterfaceSkeleton } from '@wordpress/interface';
+import { ShortcutProvider } from '@wordpress/keyboard-shortcuts';
 
 /**
  * Internal dependencies
@@ -19,13 +19,13 @@ import Header from 'components/header';
 import Sidebar from 'components/sidebar';
 import BlockEditor from 'components/block-editor';
 
-function Editor( { settings } ) {
+function Editor({ settings }) {
 	return (
 		<>
-			<FullscreenMode isActive={false} />
-			<SlotFillProvider>
-				<DropZoneProvider>
-					<FocusReturnProvider>
+			<StrictMode>
+				<ShortcutProvider>
+					<FullscreenMode isActive={false} />
+					<SlotFillProvider>
 						<InterfaceSkeleton
 							header={<Header />}
 							sidebar={<Sidebar />}
@@ -38,9 +38,9 @@ function Editor( { settings } ) {
 						/>
 
 						<Popover.Slot />
-					</FocusReturnProvider>
-				</DropZoneProvider>
-			</SlotFillProvider>
+					</SlotFillProvider>
+				</ShortcutProvider>
+			</StrictMode>
 		</>
 	);
 }
