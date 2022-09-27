@@ -86,12 +86,12 @@ function BlockEditor({ settings: _settings }) {
 				onChange={handlePersistBlocks}
 				settings={settings}
 			>
-        			<BlockBreadcrumb />
+				<BlockBreadcrumb />
 				<Sidebar.InspectorFill>
 					<BlockInspector />
 				</Sidebar.InspectorFill>
 				<div className="editor-styles-wrapper">
-					<BlockEditorKeyboardShortcuts />
+					<BlockEditorKeyboardShortcuts.Register />
 					<WritingFlow>
 						<ObserveTyping>
 							<BlockList className="getdavesbe-block-editor__block-list" />
