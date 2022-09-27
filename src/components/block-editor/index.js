@@ -21,6 +21,7 @@ import {
  * Internal dependencies
  */
 import Sidebar from 'components/sidebar';
+import {ShortcutProvider} from '@wordpress/keyboard-shortcuts';
 
 function BlockEditor( { settings: _settings } ) {
 	const [ blocks, updateBlocks ] = useState( [] );
@@ -76,25 +77,26 @@ function BlockEditor( { settings: _settings } ) {
 
 	return (
 		<div className="getdavesbe-block-editor">
-			<BlockEditorProvider
-				value={ blocks }
-				onInput={ handleUpdateBlocks }
-				onChange={ handlePersistBlocks }
-				settings={ settings }
-			>
-				<Sidebar.InspectorFill>
-					<BlockInspector />
-				</Sidebar.InspectorFill>
-				<div className="editor-styles-wrapper">
-					<BlockEditorKeyboardShortcuts />
-					<WritingFlow>
-						<ObserveTyping>
-							<BlockList className="getdavesbe-block-editor__block-list" />
-						</ObserveTyping>
-					</WritingFlow>
-				</div>
-			</BlockEditorProvider>
-
+			<ShortcutProvider>
+				<BlockEditorProvider
+					value={ blocks }
+					onInput={ handleUpdateBlocks }
+					onChange={ handlePersistBlocks }
+					settings={ settings }
+				>
+					<Sidebar.InspectorFill>
+						<BlockInspector />
+					</Sidebar.InspectorFill>
+					<div className="editor-styles-wrapper">
+						<BlockEditorKeyboardShortcuts />
+						<WritingFlow>
+							<ObserveTyping>
+								<BlockList className="getdavesbe-block-editor__block-list" />
+							</ObserveTyping>
+						</WritingFlow>
+					</div>
+				</BlockEditorProvider>
+			</ShortcutProvider>
 		</div>
 	);
 }
