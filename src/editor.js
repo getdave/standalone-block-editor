@@ -4,7 +4,6 @@
 import {
 	Popover,
 	SlotFillProvider,
-	DropZoneProvider,
 	FocusReturnProvider,
 } from '@wordpress/components';
 
@@ -20,31 +19,25 @@ import Header from 'components/header';
 import Sidebar from 'components/sidebar';
 import BlockEditor from 'components/block-editor';
 
-function Editor( { settings } ) {
+function Editor({ settings }) {
 	return (
 		<>
 			<StrictMode>
 				<ShortcutProvider>
-					<FullscreenMode isActive={ false } />
+					<FullscreenMode isActive={false} />
 					<SlotFillProvider>
-						<DropZoneProvider>
-							<FocusReturnProvider>
-								<InterfaceSkeleton
-									header={ <Header /> }
-									sidebar={ <Sidebar /> }
-									content={
-										<>
-											<Notices />
-											<BlockEditor
-												settings={ settings }
-											/>
-										</>
-									}
-								/>
+						<InterfaceSkeleton
+							header={<Header />}
+							sidebar={<Sidebar />}
+							content={
+								<>
+									<Notices />
+									<BlockEditor settings={settings} />
+								</>
+							}
+						/>
 
-								<Popover.Slot />
-							</FocusReturnProvider>
-						</DropZoneProvider>
+						<Popover.Slot />
 					</SlotFillProvider>
 				</ShortcutProvider>
 			</StrictMode>
