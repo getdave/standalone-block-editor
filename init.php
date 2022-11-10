@@ -57,6 +57,9 @@ function getdave_sbe_block_editor_init( $hook ) {
 	wp_enqueue_script( 'wp-format-library' );
 	wp_enqueue_style( 'wp-format-library' );
 
+	// load editor assets
+	\do_action('enqueue_block_assets');
+
 	// Styles.
 	wp_enqueue_style(
 		'getdave-sbe-styles', // Handle.
