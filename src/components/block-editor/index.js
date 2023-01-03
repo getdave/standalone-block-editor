@@ -13,6 +13,7 @@ import {
 	BlockEditorKeyboardShortcuts,
 	BlockEditorProvider,
 	BlockList,
+	BlockTools,
 	BlockInspector,
 	WritingFlow,
 	ObserveTyping,
@@ -92,11 +93,13 @@ function BlockEditor({ settings: _settings }) {
 				</Sidebar.InspectorFill>
 				<div className="editor-styles-wrapper">
 					<BlockEditorKeyboardShortcuts.Register />
-					<WritingFlow>
-						<ObserveTyping>
-							<BlockList className="getdavesbe-block-editor__block-list" />
-						</ObserveTyping>
-					</WritingFlow>
+					<BlockTools>
+						<WritingFlow>
+							<ObserveTyping>
+								<BlockList className="getdavesbe-block-editor__block-list" />
+							</ObserveTyping>
+						</WritingFlow>
+					</BlockTools>
 				</div>
 			</BlockEditorProvider>
 		</div>
